@@ -1,6 +1,5 @@
 import requests
 from bs4 import BeautifulSoup
-import csv
 
 URL = "https://na.op.gg/champion/statistics"
 r = requests.get(URL)
@@ -14,29 +13,39 @@ topCounter = 0
 midCounter = 0
 botCounter = 0
 jungCounter = 0
+
 for i in body:
     if 'Support' in i.text:
-        suppCounter = suppCounter + 1
+        suppCounter += 1
     if "Top" in i.text:
-        topCounter = topCounter + 1
+        topCounter += 1
     if "Middle" in i.text:
-        midCounter = midCounter + 1
+        midCounter += 1
     if "Bottom" in i.text:
-        botCounter = botCounter + 1
+        botCounter += 1
     if "Jungle" in i.text:
-        jungCounter = jungCounter + 1
-
-print '\n\n\n',"Top:    \t", suppCounter
-print "Jungle: \t", jungCounter
-print "Middle: \t", midCounter
-print "Bottom: \t", botCounter
-print "Support: \t", suppCounter, "\n\n\n"
-
-choice = raw_input('Choose list of Champtions by Role: ')
+        jungCounter += 1
 
 
-print(choice)
+print("\n\nUsing na.op.gg stats, this program will find all champions given a role.")
+print("\nBelow shows the number of champions per role")
+print ("\nTop:    \t", suppCounter)
+print ("Jungle: \t", jungCounter)
+print ("Middle: \t", midCounter)
+print ("Bottom: \t", botCounter)
+print ("Support: \t", suppCounter, "\n\n\n")
 
-for i in body:
-    if str(choice) in i.text:
-        print i.content
+choice = input('Select a role: ')
+
+
+if choice in ["Top", "Jungle", "Middle", "Bottom", "Support", "Bot", "Supp","Mid"]:
+    print("\nThe champions below are all considered", choice, "laners:\n")
+    for i in body:
+        if str(choice) in i.text:
+            champs += i.find('div',{"class":"champion-index__champion-item__name"}).text
+            print (i.find('div',{"class":"champion-index__champion-item__name"}).text)
+    print("\n\nGood luck!\n\n")
+else:
+    print("\nError: Choice Invalid\n\n")
+
+print(champs)
