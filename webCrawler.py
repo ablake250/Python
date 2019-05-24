@@ -36,6 +36,7 @@ print ("Bottom: \t", botCounter)
 print ("Support: \t", suppCounter, "\n\n\n")
 
 choice = input('Select a role: ')
+champs = []
 
 
 if choice in ["Top", "Jungle", "Middle", "Bottom", "Support", "Bot", "Supp","Mid"]:
@@ -48,4 +49,4 @@ if choice in ["Top", "Jungle", "Middle", "Bottom", "Support", "Bot", "Supp","Mid
 else:
     print("\nError: Choice Invalid\n\n")
 
-print(champs)
+#print(champs)
